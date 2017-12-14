@@ -1,5 +1,11 @@
 class Card
-  VALUES = %w(A 2 3 4 5 6 7 8 9 10 J Q K).freeze
+  VALUES = %w(2 3 4 5 6 7 8 9 10 J Q K A).freeze
+
+  VALUES_HASH = {}
+  (2..14).each do |val|
+    VALUES_HASH[VALUES[val - 2]] = val
+  end
+  VALUES_HASH.freeze
 
   SUITS = %w(clubs spades diamonds hearts).freeze
 
@@ -24,5 +30,13 @@ class Card
 
   def ==(card)
     self.value == card.value && self.suit == card.suit
+  end
+
+  def >(card)
+    VALUES_HASH[self.value] > VALUES_HASH[card.value]
+  end
+
+  def <(card)
+    VALUES_HASH[self.value] < VALUES_HASH[card.value]
   end
 end

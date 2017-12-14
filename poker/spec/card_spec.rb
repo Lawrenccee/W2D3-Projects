@@ -3,6 +3,8 @@ require "card"
 
 describe "Card" do
   subject(:card) { Card.new("2", "clubs") }
+  let(:other_card) { Card.new("2", "clubs") }
+  let(:another_card) { Card.new("K", "hearts") }
 
   describe "#initialize" do
     it "sets the value" do
@@ -34,15 +36,32 @@ describe "Card" do
   end
 
   describe "#==" do
-    let(:other_card) { Card.new("2", "clubs") }
-    let(:another_card) { Card.new("K", "hearts") }
-
-    it "correcly determines whether one card is equal to another" do
+    it "correctly determines whether one card is equal to another" do
       expect(card == other_card).to be true
     end
 
-    it "correcly determines whether one card is not equal to another" do
+    it "correctly determines whether one card is not equal to another" do
       expect(card == another_card).to be false
+    end
+  end
+
+  describe "#>" do
+    it "correctly determines whether one card is greater than another" do
+      expect(another_card > other_card).to be true
+    end
+
+    it "correctly determines whether one card is not greater than another" do
+      expect(card > another_card).to be false
+    end
+  end
+
+  describe "#<" do
+    it "correctly determines whether one card is less than another" do
+      expect(other_card < another_card).to be true
+    end
+
+    it "correctly determines whether one card is not less than another" do
+      expect(another_card < card).to be false
     end
   end
 end
